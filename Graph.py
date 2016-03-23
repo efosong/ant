@@ -1,10 +1,13 @@
 class Graph(object):
 	def __init__(self):
+		'''Initialised an empty graph (i.e. no vertices or edges) '''
 		self.vertex_list = []
 		self.adjacency_list = {}
 		self.value_list = {}
 
+
 	def _is_node(self, v):
+		'''Returns true if vertex v is in the graph'''
 		if (v in self.vertex_list):
 			return True
 		else:
