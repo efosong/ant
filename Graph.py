@@ -3,7 +3,6 @@ class Graph(object):
 		'''Initialised an empty graph (i.e. no vertices or edges) '''
 		self.vertex_list = []
 		self.adjacency_list = {}
-		self.value_list = {}
 
 
 	def _is_node(self, v):
@@ -15,10 +14,13 @@ class Graph(object):
 		
 
 	def is_adjacent(self, v, w): 
-		'''Returns true if there is an edge connecting nodes x to y in
-		   the direction x -> y'''
+		'''Returns true if there is an edge connecting vertex x to y in
+		   the direction x -> y. Note that a vertex is not adjacent to
+		   itself unless there is a loop at that vertex.'''
 		if self._is_node(v) and self._is_node(w):
-			if (w in self.adjacency_list[v]):
+			if not self.adjacency_list[v]:
+				return False
+			if (w in list(zip(*self.adjacency_list[v]))[0]):
 				return True
 			else:
 				return False
@@ -38,7 +40,7 @@ class Graph(object):
 		'''Returns a list of all vertices w such that there is an edge
 		   v -> w'''
 		try:
-			return adjacency_list[v]
+			return list(zip(*adjacency_list[v]))[0]
 		except KeyError:
 			print("Invalid vertex index")
 			print("Vertex " + str(v) + " does not exist")
@@ -50,15 +52,28 @@ class Graph(object):
 		   it does exist, throws an error'''
 		try:
 			if self._is_node(v):
-				raise IndexError
+				raise IndexError("Vertex " + str(v) + " exists already")
+			elif v <= 0 or not (type(v) is int):
+				raise IndexError("Index must be a positive integer")
 			else:
 				self.adjacency_list[v] = []
 				self.vertex_list.append(v)
-		except IndexError: 
-			print("Invalid vertex number")
-			print("Vertex " + str(v) + " exists already")
+		except IndexError as msg: 
+			print("Invalid vertex index")
+			print(msg)
 			print("Vertex was not added")
 
 	
+#	def add_edge(self, v, w, weight=1, directed=False):
+#		'''Adds an edge from v to w if both v and w exist. If
+#		   directed=True, the edge also goes from w to v. The default
+#		   weight is 1, but can be specified'''
+#		if self._is_node(v) and self._is_node(w):
+#			if self.
+#			self.adjacency_list[v].append((w, weight))
+#			if directed:
+#				weight = _weight
+#				self.add_edge(w, v, _weight, False)
+
 		
 
