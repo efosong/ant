@@ -86,4 +86,17 @@ class Graph(object):
 				print("Node " + str(w) + " does not exist")
 
 		
-
+	def remove_edge(self, v, w, directed=True):
+		'''Removes the edge from v to w if it exists. If directed=False,
+		   the edge from w to v is also removed if it exists, or nothing
+		   is removed if not'''
+		if self.is_adjacent(v, w) and (directed or self.is_adjacent(w,v)):
+			self.adjacency_list[v] = [i for i in self.adjacency_list[v] if i[0]!=w]
+			if not directed:
+				self.adjacency_list[w] = [i for i in self.adjacency_list[w] if i[0]!=v]
+		else:
+			print("Invalid edge")
+			if not self.is_adjacent(v, w):
+				print("Edge from " + str(v) + " to " + str(w) + " does not exist")
+			if not directed and not self.is_adjacent(w,v):
+				print("Edge from " + str(w) + " to " + str(v) + " does not exist")
