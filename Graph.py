@@ -49,19 +49,25 @@ class Graph(object):
 
 	def add_vertex(self, v): #TODO add requirement v is int (not important)
 		'''Adds a vertex v to the graph if it does not already exist. If
-		   it does exist, throws an error'''
-		try:
-			if self._is_node(v):
-				raise IndexError("Vertex " + str(v) + " exists already")
-			elif v <= 0 or not (type(v) is int):
-				raise IndexError("Index must be a positive integer")
-			else:
-				self.adjacency_list[v] = []
-				self.vertex_list.append(v)
-		except IndexError as msg: 
-			print("Invalid vertex index")
-			print(msg)
-			print("Vertex was not added")
+		   it does exist, throws an error.
+		   If v is a list, add each vertex within the list to the graph'''
+		if type(v) is list:
+			for vertex in v:
+				#print(str(vertex) + " is list")
+				self.add_vertex(vertex)
+		else:
+			try:
+				if self._is_node(v):
+					raise IndexError("Vertex " + str(v) + " exists already")
+				elif v <= 0 or not (type(v) is int):
+					raise IndexError("Index must be a positive integer")
+				else:
+					self.adjacency_list[v] = []
+					self.vertex_list.append(v)
+			except IndexError as msg: 
+				print("Invalid vertex index")
+				print(msg)
+				print("Vertex was not added")
 
 	
 #	def add_edge(self, v, w, weight=1, directed=False):
