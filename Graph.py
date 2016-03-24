@@ -53,7 +53,6 @@ class Graph(object):
 		   If v is a list, add each vertex within the list to the graph'''
 		if type(v) is list:
 			for vertex in v:
-				#print(str(vertex) + " is list")
 				self.add_vertex(vertex)
 		else:
 			try:
@@ -68,6 +67,18 @@ class Graph(object):
 				print("Invalid vertex index")
 				print(msg)
 				print("Vertex was not added")
+
+	def remove_vertex(self, v):
+		'''Removes a vertex v and all the associated edges from the
+		   graph, if the vertex v exists.'''
+		if self._is_node(v):
+			for vertex in self.vertex_list:
+				if self.is_adjacent(vertex, v):
+					self.remove_edge(vertex, v) 
+			del self.adjacency_list[v]
+			self.vertex_list.remove(v)
+		else:
+			print("Node " + str(v) + "does not exist")
 
 	
 	def add_edge(self, v, w, weight=1, directed=True):
