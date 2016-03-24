@@ -124,3 +124,15 @@ class Graph(object):
 		else:
 			print("Invalid edge")
 			print("Edge from " + str(v) + " to " + str(w) + " does not exist")
+
+
+	def set_edge_value(self, v, w, val):
+		'''Sets the value associated with the edge from v to w, if the
+		   edge already exists'''
+		if self.is_adjacent(v,w):
+			self.remove_edge(v,w)
+			self.add_edge(v, w, val)
+		else:
+			print("Invalid edge")
+			print("Edge from " + str(v) + " to " + str(w) + " does not exist")
+		
