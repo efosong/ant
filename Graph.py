@@ -70,16 +70,20 @@ class Graph(object):
 				print("Vertex was not added")
 
 	
-#	def add_edge(self, v, w, weight=1, directed=False):
-#		'''Adds an edge from v to w if both v and w exist. If
-#		   directed=True, the edge also goes from w to v. The default
-#		   weight is 1, but can be specified'''
-#		if self._is_node(v) and self._is_node(w):
-#			if self.
-#			self.adjacency_list[v].append((w, weight))
-#			if directed:
-#				weight = _weight
-#				self.add_edge(w, v, _weight, False)
+	def add_edge(self, v, w, weight=1, directed=True):
+		'''Adds an edge from v to w if both v and w exist. If
+		   directed=False, the edge also goes from w to v. The default
+		   weight is 1, but can be specified'''
+		if self._is_node(v) and self._is_node(w):
+			self.adjacency_list[v].append((w, weight))
+			if not directed:
+				_weight = weight
+				self.add_edge(w, v, _weight, True)
+		else:
+			if not self.__is_node(v):
+				print("Node " + str(v) + " does not exist")
+			if not self.__is_node(w):
+				print("Node " + str(w) + " does not exist")
 
 		
 
