@@ -44,7 +44,6 @@ class Graph(object):
 		except KeyError:
 			print("Invalid vertex index")
 			print("Vertex " + str(v) + " does not exist")
-			
 
 
 	def add_vertex(self, v): #TODO add requirement v is int (not important)
@@ -68,6 +67,7 @@ class Graph(object):
 				print(msg)
 				print("Vertex was not added")
 
+
 	def remove_vertex(self, v):
 		'''Removes a vertex v and all the associated edges from the
 		   graph, if the vertex v exists.'''
@@ -85,16 +85,20 @@ class Graph(object):
 		'''Adds an edge from v to w if both v and w exist. If
 		   directed=False, the edge also goes from w to v. The default
 		   weight is 1, but can be specified'''
-		if self._is_node(v) and self._is_node(w):
+		if self._is_node(v) and self._is_node(w) \
+		     and not self.is_adjacent(v, w):
 			self.adjacency_list[v].append((w, weight))
 			if not directed:
 				_weight = weight
 				self.add_edge(w, v, _weight, True)
 		else:
-			if not self.__is_node(v):
+			if not self._is_node(v):
 				print("Node " + str(v) + " does not exist")
-			if not self.__is_node(w):
+			if not self._is_node(w):
 				print("Node " + str(w) + " does not exist")
+			if self._is_node(v) and self._is_node(w):
+				print("Edge from " + str(v) + " to " + str(w)
+				      + " already exists")
 
 		
 	def remove_edge(self, v, w, directed=True):
@@ -111,3 +115,12 @@ class Graph(object):
 				print("Edge from " + str(v) + " to " + str(w) + " does not exist")
 			if not directed and not self.is_adjacent(w,v):
 				print("Edge from " + str(w) + " to " + str(v) + " does not exist")
+
+	
+	def get_edge_value(self, v, w):
+		'''Gets the value associated with the edge from v to w'''
+		if self.is_adjacent(v,w):
+			return  [i for i in self.adjacency_list[v]].pop()[1]
+		else:
+			print("Invalid edge")
+			print("Edge from " + str(v) + " to " + str(w) + " does not exist")
