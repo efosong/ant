@@ -1,8 +1,12 @@
+#TODO (maybe) : add ability for nodes to have values, and member functions to
+#get/set these
+
 class Graph(object):
 	def __init__(self):
 		'''Initialised an empty graph (i.e. no vertices or edges) '''
 		self.vertex_list = []
 		self.adjacency_list = {}
+
 
 
 	def _is_node(self, v):
@@ -11,6 +15,7 @@ class Graph(object):
 			return True
 		else:
 			return False
+
 		
 
 	def is_adjacent(self, v, w): 
@@ -35,6 +40,7 @@ class Graph(object):
 			else:
 				print("Vertex " + str(w) + " does not exist")
 
+
 	
 	def get_neighbors(self, v):
 		'''Returns a list of all vertices w such that there is an edge
@@ -44,6 +50,7 @@ class Graph(object):
 		except KeyError:
 			print("Invalid vertex index")
 			print("Vertex " + str(v) + " does not exist")
+
 
 
 	def add_vertex(self, v): #TODO add requirement v is int (not important)
@@ -68,6 +75,7 @@ class Graph(object):
 				print("Vertex was not added")
 
 
+
 	def remove_vertex(self, v):
 		'''Removes a vertex v and all the associated edges from the
 		   graph, if the vertex v exists.'''
@@ -79,6 +87,7 @@ class Graph(object):
 			self.vertex_list.remove(v)
 		else:
 			print("Node " + str(v) + "does not exist")
+
 
 	
 	def add_edge(self, v, w, weight=1, directed=True):
@@ -101,6 +110,7 @@ class Graph(object):
 				      + " already exists")
 
 		
+
 	def remove_edge(self, v, w, directed=True):
 		'''Removes the edge from v to w if it exists. If directed=False,
 		   the edge from w to v is also removed if it exists, or nothing
@@ -117,6 +127,7 @@ class Graph(object):
 				print("Edge from " + str(w) + " to " + str(v) + " does not exist")
 
 	
+
 	def get_edge_value(self, v, w):
 		'''Gets the value associated with the edge from v to w'''
 		if self.is_adjacent(v,w):
@@ -124,6 +135,7 @@ class Graph(object):
 		else:
 			print("Invalid edge")
 			print("Edge from " + str(v) + " to " + str(w) + " does not exist")
+
 
 
 	def set_edge_value(self, v, w, val):
@@ -135,4 +147,3 @@ class Graph(object):
 		else:
 			print("Invalid edge")
 			print("Edge from " + str(v) + " to " + str(w) + " does not exist")
-		
