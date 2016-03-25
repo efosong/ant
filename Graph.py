@@ -46,10 +46,12 @@ class Graph(object):
 		'''Returns a list of all vertices w such that there is an edge
 		   v -> w'''
 		try:
-			return list(zip(*adjacency_list[v]))[0]
+			return list(list(zip(*self.adjacency_list[v]))[0])
 		except KeyError:
 			print("Invalid vertex index")
 			print("Vertex " + str(v) + " does not exist")
+		except IndexError:
+			return []
 
 
 
